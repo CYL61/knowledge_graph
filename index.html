@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识图谱可视化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📊 知识图谱可视化工具</h1>
+            <p>将文本转换为知识图谱的可视化界面</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="control-panel">
+                    <h3>🎛️ 控制面板</h3>
+                    
+                    <div class="section">
+                        <h4>📁 数据源选择</h4>
+                        <select id="dataSource" class="select-input">
+                            <option value="cureus">医学研究论文 (Cureus)</option>
+                            <option value="MediumArticles">技术文章 (Medium)</option>
+                        </select>
+                        <button id="loadData" class="btn btn-primary">加载数据</button>
+                    </div>
+
+                    <div class="section">
+                        <h4>🎨 图谱设置</h4>
+                        <label>
+                            节点大小:
+                            <input type="range" id="nodeSize" min="10" max="50" value="25" class="slider">
+                            <span id="nodeSizeValue">25</span>
+                        </label>
+                        
+                        <label>
+                            边的粗细:
+                            <input type="range" id="edgeWidth" min="1" max="10" value="3" class="slider">
+                            <span id="edgeWidthValue">3</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" id="showLabels" checked> 显示标签
+                        </label>
+                    </div>
+
+                    <div class="section">
+                        <h4>🔍 搜索节点</h4>
+                        <input type="text" id="searchNode" placeholder="输入节点名称..." class="text-input">
+                        <button id="searchBtn" class="btn btn-secondary">搜索</button>
+                    </div>
+
+                    <div class="section">
+                        <h4>📊 图谱信息</h4>
+                        <div class="info-item">
+                            <span>节点数量:</span>
+                            <span id="nodeCount">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span>边数量:</span>
+                            <span id="edgeCount">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span>社区数量:</span>
+                            <span id="communityCount">0</span>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h4>⚙️ 布局算法</h4>
+                        <select id="layoutAlgorithm" class="select-input">
+                            <option value="forceAtlas2Based">Force Atlas 2</option>
+                            <option value="barnesHut">Barnes Hut</option>
+                            <option value="repulsion">Repulsion</option>
+                            <option value="hierarchical">层次布局</option>
+                        </select>
+                        <button id="applyLayout" class="btn btn-secondary">应用布局</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph-container">
+                <div class="graph-header">
+                    <h3>🌐 知识图谱</h3>
+                    <div class="graph-controls">
+                        <button id="fitGraph" class="btn btn-small">适应窗口</button>
+                        <button id="resetZoom" class="btn btn-small">重置缩放</button>
+                        <button id="exportGraph" class="btn btn-small">导出图片</button>
+                    </div>
+                </div>
+                <div id="network" class="network-canvas"></div>
+                
+                <div class="node-info" id="nodeInfo" style="display: none;">
+                    <h4>节点信息</h4>
+                    <div id="nodeDetails"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <span id="statusText">准备就绪</span>
+            <div class="loading-spinner" id="loadingSpinner" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
